@@ -1,0 +1,30 @@
+# Pavón Alvarez, Lenin
+1. date
+2. echo $HOME
+3. pwd
+4. logname
+5. hostname
+6. Dado que inició el 16 de septiembre de 1810 se usaría el comando
+		date --date="1810-09-16" +%s
+7. tty
+8. mkdir Práctica2
+9. cd Práctica2 # Revisar rutas a partir de este punto
+10. Veamos que como entramos a Práctica2, sí hay diferencia puesto que 
+    nuestro directorio de trabajo es:
+		/home/colado29/Práctica2
+    mientras que HOGAR es
+		/home/colado29
+11. cat /etc/passwd # TODO: Explicar la última línea
+12. cp -p /etc/group $HOME
+13. mv ./../group ./grupitos
+14. ls -i
+15. more grupitos
+16. ls -R $HOME
+17. type /dev/null
+18. type /bin/ls /usr/share/man/man1/ls.1.gz
+19. ./../../bin/ls, ./../../usr/share/man/man1/ls.1.gz
+20. cp /etc/hosts ./ 
+21. ls -l ./hosts
+22. cd $HOME
+23. rmdir -r Practica2
+24. exit

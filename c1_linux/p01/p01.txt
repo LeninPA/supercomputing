@@ -1,0 +1,37 @@
+# Pavón Alvarez, Lenin
+0. Estando en la carpeta colado29, se usa la orden 
+mkdir otro
+1. id
+2. pwd
+3. cd ./../yoli/Hola
+		también puede usarse el comando
+   cd /home/yoli/Hola
+		a) mkdir ./../../colado29/nuevo 
+		b) cp -r ./../adios ./../../colado29/nuevo/adios
+		c) cp ./../../../etc/psswd ./../../colado29
+4. cd ./../../colado29, o también se puede usar el comando cd $HOME
+		a) mv /home/colado29/nuevo/adios/b/dos /home/colado29/otro/tres
+		b) rm -r /home/colado29/nuevo/adios/a
+		c) mv /home/colado29/nuevo/adios/b /home/colado29/nuevo
+5. Continuando en /home/colado29
+		a) rm ./passwd
+		b) ls -R -l ./nuevo
+		c) cat ./otro/tres
+6. El diagrama se ve como: 
+
+/
+└── home
+    ├── colado29
+    │   ├── nuevo
+    │   │   ├── adios
+    │   │   └── b
+    │   └── otro
+    │       └── tres
+    └── yoli
+        ├── Hola
+        │   └── uno
+        └── adios
+            ├── a
+            └── b
+                └── dos
+   Se adjunta diagrama gráfico en la entrega de la tarea

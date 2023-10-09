@@ -1,0 +1,19 @@
+# Pavón Alvarez, Lenin
+CUANDO TE RINDES (Martin Valverde)
+La otra gente no te tiene compasion,
+se burlan o te ignoran, ya lo se.
+El mundo no fue hecho para oir nuestra cancion, somos dos personas al reves.
+Ya que te conozco y te comprendo mejor,
+Cuando te rindes y caes sin valor, recuerda lo que pienso yo de ti, # 5. Elimina la línea actual
+recuerda que te dije que tu eres lo mejor, que puede haber en este mundo gris.
+No entiendo como puede ser que existas, ni como llegaste hasta aqui.
+te admiro por lo que eres en verdad. # 6. Muévete 2 líneas abajo y pega
+Somos diferentes, y eso da sabor y tono a esta bella amistad.
+El mundo es ancho y se mueve sin cesar, un dia ya no nos veremos mas,
+pero a pesar de eso no podremos olvidar estos momentos de sinceridad.
+Yo no soy perfecto, ni tampoco lo eres tu, pero eso me hace amarte solo mas.
+Tus errores son reflejo de mi falta de dar luz, contigo he llegado a la verdad.
+# 1. G$, 2. 1G, 3. 6G, 4. $, 5. 2dd, 6. jjp, 7. g/cuando/s/cuando/CUANDO
+# 7. Como es case sensitive, no hay ocurrencias de cuando que se sustituyeran
+# 8. 1,5w cuando.txt, 9. :g/sonreir, 10. :set nu, 
+# 11. Insertaría la salida del comando con r!date, 12. :w, 13. :q
