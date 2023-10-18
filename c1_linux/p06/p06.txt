@@ -1,0 +1,59 @@
+# Lenin Pavón Alvarez
+1. mkdir redirec
+2. cd redirec
+3. echo "El perro es negro" > poema; echo "El gato café" >> poema
+4. cp ./poema ./poemita
+5. echo "El canario es amarillo" >> poemita
+6. a) El comando
+		head -1 ./poemita ./verso > frase
+      genera como salida la primera
+	  línea de los archivos poemita 
+	  y verso; y lo escribe de manera 
+	  destructiva en frase.
+   b) El comando
+		tail -1 ./poemita ./verso 2> arch
+      genera como salida la última línea
+	  del archivo poemita y en caso de
+	  error lo escribe de manera destructiva 
+	  en el archivo arch.
+   c) El comando 
+   	grep gato ./poema ./verso | tee poemota > archive 2> archivo2
+      toma como entrada los archivos poema
+      y verso para el comando grep donde busca
+      el patrón gato y su salida se bifurca
+      yendo a poemota y a archive, 
+      ambos de manera destruvtiva. 
+      Cualquier error en la bifurcación 
+      se va a archivo2
+   d) El comando
+   	grep gato ./poema ./verso 2>otro | tee -a poemota > archive 2> archivo2
+      toma como entradas los archivos
+      poema y verso para el comando grep.
+      La salida de error de grep se escribe
+      de manera destructiva en el archivo 
+      otro. La salida se bifurca de manera no 
+      destructiva a poemota
+      y de manera destructiva a archive
+   e) El comando
+   	grep gato ./poema ./verso 2>&1| tee -a poemota >> archive 
+      toma como entrada los archivos
+      poema y verso donde el comando
+      grep busca el patrón gato, el error
+      y la salida de grep se bifurcan 
+      yendo a poemota y a archive, ambos
+      de manera no destructiva
+   f) El comando
+   	wc -l < /etc/passwd >> num 2> otromas
+      toma como entrada a 
+      /etc/passwd para el comando wc -l 
+      que va a escribir su número de líneas 
+      de manera no destructiva en num la salida.
+      El error se escribe de manera destructiva
+      en ss
+   g) El comando 
+   	cat <<FIN | wc -l | tee num > ss
+      toma como entrada tty hasta que se encuentra a
+      FIN para el comando cat. Su salida se va como
+      la entrada a wc -l que cuenta la cantidad
+      de líneas en la entrada y bifurca su salida escribiendo
+      en los archivos num y ss de manera destructiva
