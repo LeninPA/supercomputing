@@ -1,0 +1,70 @@
+# Pavón Alvarez, Lenin
+1. ssh -p 7719 colado29@132.248.202.25
+2. mkdir Marcas
+3. cd Marcas
+4. touch a b
+5. Usando ls para comprobar, vemos que 
+   sí tenemos archivos vacíos
+6. cp -p /etc/passwd /etc/group /etc/hosts .
+7. Usando ls -l produce
+		-rw-r--r--. 1 colado29 colado29    0 Oct 13 08:04 a
+		-rw-r--r--. 1 colado29 colado29    0 Oct 13 08:04 b
+		-rw-r--r--. 1 colado29 colado29 1522 Sep 27 16:08 group
+		-rw-r--r--. 1 colado29 colado29  158 Jun 23  2020 hosts
+		-rw-r--r--. 1 colado29 colado29 3523 Sep 27 16:08 passwd
+8. ln ./passwd ./passwd2
+9. Comprobando con ls -li
+		268436350 -rw-r--r--. 2 colado29 colado29 3523 Sep 27 16:08 passwd
+		268436350 -rw-r--r--. 2 colado29 colado29 3523 Sep 27 16:08 passwd2
+   veamos que tienen el mismo tamaño puesto que
+   tienen el mismo i nodo y por tanto hacen referencia
+   al mismo conjunto de datos en la memoria.
+10. ln -s ./passwd ./passwd_s
+11. Revisando con ls -l
+		-rw-r--r--. 2 colado29 colado29 3523 Sep 27 16:08 passwd2
+		lrwxrwxrwx. 1 colado29 colado29    8 Oct 13 08:11 passwd_s -> ./passwd
+    De donde vemos que se diferencían con (1) el tipo de archivo;
+	(2) los permisos, ya que para la simbólica todos son rwx;
+	(3) la cantidad de ligas asociadas; (4) el tamaño del archivo;
+	y (5) a donde apuntan las ligas.
+	Revisando ahora con ls -li veamos que produce
+		268436350 -rw-r--r--. 2 colado29 colado29 3523 Sep 27 16:08 passwd2
+		268436673 lrwxrwxrwx. 1 colado29 colado29    8 Oct 13 08:11 passwd_s -> ./passwd 
+    Que a diferencia del comando anterior, vemos el inodo
+	asociado a cada archivo. Por lo que la función de la opción
+	-i es mostrar el inodo asociado.
+12. Usando ls -l ./b
+		-rw-r--r--. 1 colado29 colado29 0 Oct 13 08:04 ./b
+13. Modificó las marcas de tiempo de b y como no existía el archivo
+    time, se creó a las 08:18
+14. Aplicando los comandos en orden:
+    mtime
+		-rw-r--r--. 1 colado29 colado29 0 Oct 13 08:18 time
+    ctime
+		-rw-r--r--. 1 colado29 colado29 0 Oct 13 08:18 time
+    atime
+		-rw-r--r--. 1 colado29 colado29 0 Oct 13 08:18 time
+15. Descansito
+16. echo hola >> time
+17. El único tiempo que se mantiene constante es el atime pues 
+		ls -lu time
+    produce
+		-rw-r--r--. 1 colado29 colado29 5 Oct 13 08:18 time
+    Para los otros produce
+		-rw-r--r--. 1 colado29 colado29 5 Oct 13 08:42 time
+		-rw-r--r--. 1 colado29 colado29 5 Oct 13 08:42 time
+18. En la línea '1 2 3 4 5 6 7 8 9 10' hay 20 caracteres
+19. Se modificó el atime 
+		-rw-r--r--. 1 colado29 colado29 5 Oct 13 08:48 time
+    puesto que accesamos al archivo. Mientras que
+	en los reactivos pasados sólo lo modificábamos
+20. Usando chmod 640 time checamos 
+    ls -l time
+		-rw-r-----. 1 colado29 colado29 5 Oct 13 08:42 time
+    ls -lc time
+		-rw-r-----. 1 colado29 colado29 5 Oct 13 08:52 time
+    ls -lu time
+		-rw-r-----. 1 colado29 colado29 5 Oct 13 08:48 time
+    por lo que el ctime se modificó al modificar 
+	los permisos pero no el contenido, por lo que mtime 
+	permanece igual.

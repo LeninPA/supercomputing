@@ -1,0 +1,66 @@
+# Pavón Alvarez, Lenin
+1. mkdir Ligas
+2. cd Ligas
+		Ejecutando '>a' y '>b'
+3. Llevando a cabo el comando ls obtenemos
+		a  b
+   y con las opciones 'li',
+		805313535 -rw-r--r--. 1 colado29 colado29 0 Oct 10 23:41 a
+		805313920 -rw-r--r--. 1 colado29 colado29 0 Oct 10 23:41 b
+   por lo que como tienen diferente i nodo 
+   son dos archivos diferentes. 
+Ahora aplicando el comando 
+		cp -p /etc/hosts /etc/passwd /etc/group
+4. Al aplicar el comando 'ls -l'
+		-rw-r--r--. 1 colado29 colado29    0 Oct 10 23:41 a
+		-rw-r--r--. 1 colado29 colado29    0 Oct 10 23:41 b
+		-rw-r--r--. 1 colado29 colado29 1522 Sep 27 16:08 group
+		-rw-r--r--. 1 colado29 colado29  158 Jun 23  2020 hosts
+		-rw-r--r--. 1 colado29 colado29 3523 Sep 27 16:08 passwd
+   podemos ver que 
+		a) El tipo de archivo es común
+		b) Tenemos permiso de leer y escribir, 
+		   no de ejecutar. Otros miembros del 
+		   grupo, o externos sólo tienen permiso
+		   de lectura.
+		c) Cada archivo tiene un enlace a su 
+		   contenido
+		d) Los archivos fueron creados por 
+		   colado29 del grupo colado 29
+   de aquí podemos ver su tamaño, fecha de 
+   creación y nombre.
+5. Aplicando el comando
+		ln passwd passwd2		
+6. Verificando que de hecho es una ligadura dura
+   usando el comando
+		ls -l
+   que nos muestra los atributos de los archivos,
+   tenemos que hay dos líneas en particular
+		805313922 -rw-r--r--. 2 colado29 colado29 3523 Sep 27 16:08 passwd
+		805313922 -rw-r--r--. 2 colado29 colado29 3523 Sep 27 16:08 passwd2
+   y vemos que ambos archivos tienen el mismo
+   inodo. Por lo que estamos viendo dos representaciones
+   diferentes del mismo contenido.
+7. Tienen el mismo tamaño porque apuntan al mismo
+   contenido.
+8. Aplicando el comando 
+		ln -s passwd passwd_s
+9. Veamos que haciendo el comando 'ls -l'
+		lrwxrwxrwx. 1 colado29 colado29    6 Oct 11 00:12 passwd_s -> passwd
+   de donde podemos ver que es un tipo de archivo 
+   diferente que apunta a 'passwd' de manera indirecta,
+   se puede apreciar en el tamaño tan pequeño a
+   comparación de 'passwd'. Además, todos los
+   usuarios tienen permiso de leer, escribir y 
+   ejecutar.
+10. La opción '-i' permite conocer el inodo asociado
+    con los archivos que enumera el comando 'ls'. A 
+    diferencia del comando anterior, la opción -i
+    muestra el inodo asociado a cada archivo al inicio
+    de la línea; al ejecutarlo nos devuelve
+		805313535 -rw-r--r--. 1 colado29 colado29    0 Oct 10 23:41 a
+		805313920 -rw-r--r--. 1 colado29 colado29    0 Oct 10 23:41 b
+		805313923 -rw-r--r--. 1 colado29 colado29 1522 Sep 27 16:08 group
+		...
+		805313922 -rw-r--r--. 2 colado29 colado29 3523 Sep 27 16:08 passwd2
+		805313924 lrwxrwxrwx. 1 colado29 colado29    6 Oct 11 00:12 passwd_s -> passwd

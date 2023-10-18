@@ -1,27 +1,64 @@
 # Pavón Alvarez, Lenin
+# Se pondrá el comando y debajo la respuesta a 
+# la pregunta usando el resultado del comando
 1. date
+		Sun Oct  8 10:32:58 PM CST 2023
 2. echo $HOME
+		/home/colado29
 3. pwd
+		/home/colado29
 4. logname
+		colado29
 5. hostname
+		ahsoka.super.unam.mx
 6. Dado que inició el 16 de septiembre de 1810 se usaría el comando
 		date --date="1810-09-16" +%s
+   que da como respuesta
+		-5026814604
 7. tty
+		/dev/pts/8
 8. mkdir Práctica2
-9. cd Práctica2 # Revisar rutas a partir de este punto
+9. cd Práctica2
 10. Veamos que como entramos a Práctica2, sí hay diferencia puesto que 
     nuestro directorio de trabajo es:
 		/home/colado29/Práctica2
     mientras que HOGAR es
 		/home/colado29
-11. cat /etc/passwd # TODO: Explicar la última línea
+11. Usando el comando
+		cat /etc/passwd
+	Nos muestra que la última línea es
+		colado32:x:2032:2032::/home/colado32:/bin/bash
+    De donde podemos deducir que esta línea
+		a) Corresponde al usuario colado32
+		b) No conocemos la contraseña cifrada del usuario
+		c) Su UID es 2032
+		d) Su GID primario es 2032
+		e) No tiene comentarios
+		f) Su directorio home es /home/colado32
+		g) Su shell es /bin/bash
 12. cp -p /etc/group $HOME
+		o también
+    cp -p /etc/group /home/colado29
 13. mv ./../group ./grupitos
 14. ls -i
+		y por tanto su i-nodo es
+    805313002
 15. more grupitos
 16. ls -R $HOME
 17. type /dev/null
-18. type /bin/ls /usr/share/man/man1/ls.1.gz
+		-bash: type: /dev/null: not found
+    por lo que es su propio formato de archivo
+18.		a) type /bin/ls
+				/bin/ls is /bin/ls
+		   por lo que es su propio tipo de archivo con las
+		   instrucciones para ejecutar el comando ls al encontrarse
+		   en la carpeta bin
+
+		b) type /bin/ls /usr/share/man/man1/ls.1.gz
+				-bash: type: grupitos: not found
+		   por lo que es su propio formato de archivo, y contiene
+		   la información acerca de (1) qué grupos existen y (2)
+		   qué usuarios pertenecen a ellos.
 19. ./../../bin/ls, ./../../usr/share/man/man1/ls.1.gz
 20. cp /etc/hosts ./ 
 21. ls -l ./hosts

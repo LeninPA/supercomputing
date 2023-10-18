@@ -1,0 +1,19 @@
+# Lenin Pavón Alvarez
+1. mkdir redirec
+2. cd redirec
+3. echo "El perro es negro" > poema; echo "El gato café" >> poema
+4. cp ./poema ./poemita
+5. echo "El canario es amarillo" >> poemita
+6. a) El comando
+		head -1 ./poemita ./verso > frase
+      genera como salida la primera
+	  línea de los archivos poemita 
+	  y verso; y lo escribe de manera 
+	  destructiva en frase.
+   b) El comando
+		tail -1 ./poemita ./verso 2> arch
+      genera como salida la última línea
+	  del archivo poemita y en caso de
+	  error lo escribe de manera destructiva 
+	  en el archivo arch.
+   c)

@@ -1,0 +1,133 @@
+# Pavón Alvarez, Lenin
+1. ssh -p 7719 colado29@132.248.202.25
+2. cd $HOME
+3. cp -r /home/yoli/perm .
+4. Veamos que de hecho se cumple con 
+		ls /home/colado29/perm
+   que produce
+		a  a.out  b  c  d  f
+5. Usando
+		ls -ld ./perm
+   que produce
+		drwxr-xr-x. 2 colado29 colado29 64 Oct 11 21:19 ./perm
+6. Usando 
+		ls -l ./perm
+   que produce 
+		-rw-r--r--. 1 colado29 colado29   17 Oct 11 21:19 a
+		-rwxr-xr-x. 1 colado29 colado29 8360 Oct 11 21:19 a.out
+		-rw-r--r--. 1 colado29 colado29   17 Oct 11 21:19 b
+		-rw-r--r--. 1 colado29 colado29   17 Oct 11 21:19 c
+		-rw-r--r--. 1 colado29 colado29   17 Oct 11 21:19 d
+		-rw-r--r--. 1 colado29 colado29   16 Oct 11 21:19 f
+   por lo que aplicando
+		chmod 000 ./perm/b
+		chmod a=r ./perm/c
+   volvemos a aplicar el primer comando y nos produce
+		-rw-r--r--. 1 colado29 colado29   17 Oct 11 21:19 a
+		-rwxr-xr-x. 1 colado29 colado29 8360 Oct 11 21:19 a.out
+		----------. 1 colado29 colado29   17 Oct 11 21:19 b
+		-r--r--r--. 1 colado29 colado29   17 Oct 11 21:19 c
+		-rw-r--r--. 1 colado29 colado29   17 Oct 11 21:19 d
+		-rw-r--r--. 1 colado29 colado29   16 Oct 11 21:19 f
+7. chmod a=x ./perm
+8. Usando
+		ls ./perm
+   produce
+		ls: cannot open directory './perm': Permission denied
+9. cd ./perm
+		No genera mensajes de error
+10. Usando el comando
+		ls
+    genera 
+		ls: cannot open directory '.': Permission denied
+11. Usando el comando
+		ls -l ./a
+    produce 
+		-rw-r--r--. 1 colado29 colado29 17 Oct 11 21:19 ./a
+12. cd $HOME
+13. chmod a=r ./perm
+14. Usando
+		ls ./perm
+    genera
+		ls: cannot access './perm/a': Permission denied
+		ls: cannot access './perm/a.out': Permission denied
+		ls: cannot access './perm/b': Permission denied
+		...
+		ls: cannot access './perm/f': Permission denied
+		a  a.out  b  c  d  f
+15. Usando 
+		cd ./perm
+    genera
+		-bash: cd: ./perm: Permission denied
+16. Usando 
+		ls
+    genera
+		cancion.txt  cuando.txt  Ligas  nuevo  nuevo2  otro  perm
+17. Usando
+		ls -l ./perm/a
+    genera
+		ls: cannot access './perm/a': Permission denied
+18. chmod a=rx ./perm
+19. cd perm
+20. Usando ls -ld
+		dr-xr-xr-x. 2 colado29 colado29 64 Oct 11 21:19 .
+21. Usando
+		ls -l 
+    genera
+		-rw-r--r--. 1 colado29 colado29   17 Oct 11 21:19 a
+		-rwxr-xr-x. 1 colado29 colado29 8360 Oct 11 21:19 a.out
+		----------. 1 colado29 colado29   17 Oct 11 21:19 b
+		-r--r--r--. 1 colado29 colado29   17 Oct 11 21:19 c
+		-rw-r--r--. 1 colado29 colado29   17 Oct 11 21:19 d
+		-rw-r--r--. 1 colado29 colado29   16 Oct 11 21:19 f
+22. Usando
+		cat ./a
+    genera
+		soy el archivo a
+23. echo hola >> a
+24. Usando de nuevo
+		cat ./a
+    genera
+		soy el archivo a
+		hola
+25. Usando
+		echo om tare tuttare ture swaha >> c
+    genera
+		-bash: c: Permission denied
+26. cat ./b
+27. Usando
+		rm ./b
+    genera 
+		rm: remove write-protected regular file './b'?
+    tras confirmar, genera
+		rm: cannot remove './b': Permission denied
+28. Como seguimos en perm aplicamos
+		chmod a+w ./perm
+29. Usando
+		rm ./b
+    genera 
+		rm: remove write-protected regular file './b'?
+    tras confirmar, elimina el archivo
+30. Escribiendo
+		./a.out
+    genera
+		hola mundo
+31. chmod a-r ./a.out
+32. Escribiendo
+		./a.out
+    Sigue generando el mismo resultado que vimos en 30.
+		hola mundo
+33. Escribiendo
+		./f
+    genera
+		-bash: ./f: Permission denied
+34. chmod a+x ./f
+35. Escribiendo     
+         ./f        
+    genera         
+		 hola soy f
+36. chmod a-x ./f
+37. Escribiendo 
+		./f
+    genera
+		-bash: ./f: Permission denied
