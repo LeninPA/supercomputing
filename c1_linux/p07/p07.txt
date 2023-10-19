@@ -1,0 +1,67 @@
+# Pavón Alvarez, Lenin
+1. a) jobs sin ninguna opción consulta
+		los procesos que se están ejecutando
+		en la terminal actual.
+   b) kill va a mandar la señal de 
+		eliminar al trabajo no. 1
+   c) kill va a mandar la señal de
+		terminación al proceso
+		7719
+   d) Selecciona los procesos
+		asociados al usuario (efectivo)
+		yoli
+   e) Leyendo el modo octal, da permiso
+		de sticky bit a otros, y permiso 
+		de lectura, escritura, y ejecución 
+		al usuario, su grupo, y otros para
+		el archivo /home/yoli/prueba
+2. a) La cantidad de procesos asociados
+		al usuario yoliztli
+   b) La cantidad de directorios en /etc
+   c) El directorio home de yoli
+   d) La cantidad de procesos en 
+		los que yoliztli es usuario efectivo
+3. a) cd $HOME
+   b) Usando 
+		ps -ef | grep primos
+      sólo aparece
+		colado29  283212  282986  0 09:15 pts/0    00:00:00 grep --color=auto primos
+      que es el grep que busca al
+	  proceso primos por lo que 
+	  no hay un proceso ejecutándose
+	  llamado primos
+   c) Usando tty, estoy en /dev/pts/0
+   d) Usando jobs, me aparece que no 
+      se está ejecutando ningún proceso
+	  asociado a mi temrinal y por ende 
+	  tampoco uno llamado primos
+   e) cp ./../yoliztli/programas/primos .
+   f) ./primos
+   g) Usando ^Z o CTRL + Z dado que está
+      en primer plano y produce
+		[1]+  Stopped                 ./primos
+   h) Usando el comando jobs
+		[1]+  Stopped                 ./primos
+      produciendo el identificador 1
+   i) Usando ps le asigna el PID 283344
+   j) PPID o Parent Process ID, el proceso padre
+      se puede identificar con ps -l
+	  que da 282986 que es el PID de 
+	  la terminal
+   k) bg %1
+   l) kill -19 %1, que verificando con jobs da
+		[1]+  Stopped                 ./primos
+   m) kill -18 %1
+   n) kill -15 %1
+   o) Tiene permisos
+		-r-sr-xr-x
+      Que da permisos de lectura para todos,
+	  ejecución para mimebros del grupo y otros,
+	  y de setuid para el usuario.
+   p) Usando jobs -l para conocer el PID: 283433
+      y usando
+		ps -eo pid,ruser,euser,rgroup,egroup,cmd | grep 283433
+      para conocer los permisos que tiene, 
+	  ejecuta el archivo con usuario efectivo
+	  yoliztli, y grupo efectivo colado29.
+	  Confirmando que tiene el permiso s.
