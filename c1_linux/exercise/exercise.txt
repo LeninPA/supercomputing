@@ -1,0 +1,61 @@
+# Pavón Alvarez, Lenin
+1. Usando ssh
+2. mkdir Repaso1
+3. cd Repaso1
+4. logname
+5. tty
+6. clear
+7. w
+		Obtengo el nombre de usuario, 
+		terminal, tiempo sin hacer nada,
+		JCPU (tiempo usado por los 
+		procesos de la terminal del
+		usuario) y PCPU (el tiempo usado
+		por el proceso actual)
+8. whoami te pude indicar quién eres
+9. date --date="@-446111760"
+		Sat Nov 12 10:04:00 AM CST 1955 
+   cayó un rayo en la torre de Hill Valley
+10. cal -y
+11. date --date="2001-01-01" +"%A"
+12. De acuerdo a sí mismo, 
+    "es una interfaz para los manuales de
+	referencia del sistema"
+13. pwd
+14. ls -ld
+15.		a) cp /etc/group ./arch1
+		b) /etc/group es una
+16. cp /etc/passwd .
+    cp /etc/passwd ./passwd
+17. Imprimió a terminal los contenidos
+    de arch1
+18. Hizo lo mismo que el comando anterior pero
+    de manera paginada
+19. Contiene información acerca del usuario,
+    su contraseña, su grupo primario, comentarios,
+	su directorio home, y su terminal.
+20. mv ./arch1 ./passwd
+21. Ahora sólo muestra el contenido de los usuarios 
+    pertinentes a sus grupos
+22. .. indica el directorio padre del directorio actual
+    por lo que cd .. indica acceder al directorio padre
+	del directorio actual.
+23. cp /etc/issue ./archivito
+24. cd cd Repaso1
+25. ls ..
+26. Muestra los contenidos del directorio padre
+27. Movió archivito a la carpeta actual y es una 
+    ruta relativa
+28. ln arch2 arch3
+29. Imprimió los contenidos de Repaso1 en formato
+    largo junto con su inodo. La diferencia 
+	primordial entre ln y cp es la cantidad de 
+	inodos final. Con ln no se crea ningún inodo
+	nuevo, puesto que referencía a los contenidos
+	ya existentes. En cambio, cp genera un nuevo
+	inodo porque genera un nuevo archivo.
+30. cat arch3
+31. cp /etc/group arch2
+32. Cambió dado que arch2 cambió. Y como arch3 hace referencia
+    a los contenidos de arch2, su contenido cambió con él.
+33. 
