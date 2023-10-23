@@ -58,4 +58,35 @@
 31. cp /etc/group arch2
 32. Cambió dado que arch2 cambió. Y como arch3 hace referencia
     a los contenidos de arch2, su contenido cambió con él.
-33. 
+33. u=rw, go=r
+34. chmod 400 ./arch3
+35. Tiene 2 ligas duras
+36. rm arch2
+37. Tiene solamente 1
+38. mkdir OtroDir
+39. Obtuve información sobre el tipo de archivo de 
+    todos los contenidos de Repaso1
+40. Sí
+41. En mi directorio HOME
+42. cp /usr/include/python3.9/pyconfig-64.h ./Repaso1/
+43. No, porque no está vacío
+44. Pidió autorización y luego lo eliminó
+45. mkdir Repaso1
+46. chgrp sys Repaso1
+47. chown root Repaso1/
+48. No porque no tendría el permiso para hacerlo
+49. ls -ld
+50. Crea un directorio dir 
+51. Imprime atributos de dir
+52. Manda la línea "plan becarios " al archivo ./dir/plan
+53. Entra a dir
+54. Imprime el contenido de plan
+55. Regresa a home
+56. Asigna permiso de lectura a usuario únicamente
+    para dir
+57. Imprime contenidos de dir
+58. Imprime atibutos de dir/plan
+59. entra a dir con error
+60. Añade permiso de ejecución únicamente al usuario
+61. Copia group a nuevo
+62. exit
