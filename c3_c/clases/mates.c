@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int suma (int s1, int s2) {
-	return s1 + s2;
-}
+int suma(int, int);
 
 int main() {
 	printf("Biblioteca math.h\n");
@@ -18,3 +16,7 @@ int main() {
 	printf("La suma de %d y %d es %d\n", a, b, suma(a,b));
 	return 0;
 }
+int suma (int s1, int s2) {
+	return s1 + s2;
+}
+
