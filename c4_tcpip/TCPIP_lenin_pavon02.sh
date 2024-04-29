@@ -13,3 +13,15 @@ do
 	ipb+=(`printf "%0*d\n" 8 $aux`)
 	echo ${ipb[i]}
 done
+maskb=""
+for (( i=0; i<=32; i++ ))
+do
+	if [[ $i -le $mask ]]
+	then
+		maskb="${maskb}1"
+	else
+		maskb="${maskb}0"
+	fi
+done
+echo $maskb
+
