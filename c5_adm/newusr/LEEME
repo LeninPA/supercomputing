@@ -1,0 +1,12 @@
+Se deben de ingresar los parámetros de una manera similar
+a la forma en la que se escribe el /etc/passwd con las
+contraseñas escritas en texto plano de manera que el sistema
+genere el hash en la base apropiada y una sal aleatoria. 
+Tiene 6 argumentos:
+1. logname
+2. pswd
+3. uid
+4. gid
+5. home
+6. shell
+Posterior a ello se tiene que ejecutar línea por línea
