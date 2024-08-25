@@ -1,0 +1,2 @@
+The value of x is:  42
+The value of y is:  3.14
