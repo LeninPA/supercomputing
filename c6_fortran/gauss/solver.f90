@@ -165,6 +165,8 @@ program solver
         print *, "No solution could be found"
     else
         print *,"The solution vector x is", b
+        write(20, *) "The solution vector is: "
+        write(20, *) b
     end if
     close(20)
     print *, "Output has been saved"
