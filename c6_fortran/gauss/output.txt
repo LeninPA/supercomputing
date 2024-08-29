@@ -1,5 +1,5 @@
  Matrix after Gauss - Jordan elimination process:
-   1.00000000       0.00000000    
-   0.00000000       1.00000000    
+              NaN              NaN
+              NaN              NaN
  The solution vector is: 
-   2.00000000       1.00000000    
+        -Infinity         Infinity
