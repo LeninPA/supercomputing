@@ -1,0 +1,3 @@
+ Matrix after Gauss - Jordan elimination process:
+   1.00000000       0.00000000    
+   0.00000000       1.00000000    

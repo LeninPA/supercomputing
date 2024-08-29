@@ -140,7 +140,7 @@ program solver
         allocate( A(n,n) , b(n) )
         do i = 1,n
             read(10, *) A(i,:)
-            print *, "Column", i, ":", A(i, :)
+            print *, "Row", i, ":", A(i, :)
         end do
         read(10, *) b
         print *, "b:", b
@@ -148,4 +148,24 @@ program solver
     else
         stop "Invalid choice"
     end if
+    ! Gauss - Jordan
+    call solve(A, b, n, solution)
+    ! Results
+    print *, "Matrix after Gauss - Jordan elimination process:"
+    do i = 1,n
+        print *, A(i, :)
+    end do
+    ! Saving matrix
+    open(unit = 20, file = 'output.txt', status = 'replace', action = 'write')
+        write(20, *) "Matrix after Gauss - Jordan elimination process:"
+        do i = 1,n
+            write(20, *) A(i, :)
+        end do
+    if (.not. solution) then
+        print *, "No solution could be found"
+    else
+        print *,"The solution vector x is", b
+    end if
+    close(20)
+    print *, "Output has been saved"
 end program solver
