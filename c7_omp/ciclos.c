@@ -55,13 +55,8 @@ int main ( )
 	gettimeofday(&start, NULL);
 	#pragma omp parallel
 	{
-		int i,identificador, num_hilos, inicio, final;
-		identificador = omp_get_thread_num();
-		num_hilos     = omp_get_num_threads();
-		inicio = identificador * N / num_hilos;
-		final  = ( identificador + 1 ) * N / num_hilos;
-		if (identificador == num_hilos - 1) final = N;
-		for ( i = inicio ; i < final ; i++ ) 
+		#pragma omp for
+		for ( int i = 0 ; i < N ; i++ ) 
 		{
 			arr_c[i] = arr_a[i] + arr_b[i];
 		}
