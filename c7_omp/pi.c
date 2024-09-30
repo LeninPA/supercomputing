@@ -30,5 +30,5 @@ int main(){
     pi=paso*pi;
     tiempo_pared=omp_get_wtime()- tiempo_inicial;
     printf("pi = %f \n",pi);
-    printf("Tiempo = %f s, hilos = %d \n",tiempo_pared,cardinal
+    printf("Tiempo = %f s, hilos = %d \n",tiempo_pared,cardinalidad_hilos);
 }
