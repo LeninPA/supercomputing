@@ -2,24 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+#include <omp.h>
+#include <stdbool.h>
 
 #define MAX_ROWS 3959
 #define MAX_COLS 9
+#define RANK 56
 
-
-// Comparison function
-void ordenar(int *numeros, int n) { 
-	int i, j, temp;
-	for ( i = 0 ; i < n - 1 ; i++ ) {
-		for ( j = i + 1 ; j < n ; j++ ) {
-			if ( numeros[i] > numeros[j] ){
-				temp = numeros[i];
-				numeros[i] = numeros[j];
-				numeros[j] = temp;
-			}
-		}
-	}
-}
 
 // Calcula frecuencia
 int count_ones(int* mascara, int n){
@@ -44,11 +33,14 @@ void leer_csv(char *filename, int *numeros, int n_args){
 	int nproducto, concurso, R[7];
 	float bolsa;
 	char fecha[11];
-	int i, j, fila_actual = -1;
+	int i, j,k, fila_actual = -1;
 	int filas_validas[MAX_ROWS];
 	int counter = 0, frecuencia[7] = {0};
-	int total[7][MAX_ROWS] = {0};
+	int total[7][MAX_ROWS] = {0}; // Replica de historico.csv
 	int mascara[7][MAX_ROWS] = {0};
+	int single[RANK] = {0}; // Frecuencia de aparición números únicos
+	int pair[RANK][RANK] = {0}; // Frecuencia pares
+	int adicionales[RANK][RANK] = {0}; // Frecuencia pares
 
 	// Abrir el archivo CSV por primera vez
 	file = fopen(filename, "r");
@@ -65,40 +57,111 @@ void leer_csv(char *filename, int *numeros, int n_args){
 		{
 			for ( j = 0 ; j < 7 ; j++ ) {
 				total[j][fila_actual] = R[j];
-				if ( numeros[0] == R[j] )
-					mascara[0][fila_actual] = 1;
+				single[R[j] - 1] += 1;
 			}
 		}
 		fila_actual++;
 	}
 	fclose(file);
-	frecuencia[0] = count_ones(mascara[0], MAX_ROWS);
-	printf("Frecuencia de %2d: %3d\n",numeros[0], frecuencia[0]);
-	// Lectura demás números
-	for ( i = 1 ; i < n_args ; i++ )
-	{
-		for ( fila_actual = 0 ; fila_actual < MAX_ROWS ; fila_actual++ )
-		{
-			if ( i == 6)
-			{
-				if ( mascara[5][fila_actual] == 1 && numeros[6] == total[6][fila_actual] )
-				{
-					mascara[6][fila_actual] = 1;
+	printf("Frecuencia números únicos\n");
+	for ( i = 0 ; i < RANK ; i++ ) {
+		printf("%2d,%3d\n", i+1, single[i]);
+	}
+	/*
+	 * Cálculo natural con natural
+	 */
+	// Primer número
+	#pragma omp parallel for private(j, fila_actual) collapse(3)
+	for ( i = 1 ; i <= RANK ; i++ ) {
+		// Segundo número
+		for ( j = 1 ; j <= RANK ; j++ ) {
+			// Iteramos sobre el historico
+			for ( fila_actual = 0 ; fila_actual < MAX_ROWS ; fila_actual++ ) {
+				int min,max;
+				if (i < j){
+					min = i;
+					max = j;
+				} else {
+					min = j;
+					max = i;
 				}
-			}
-			else
-			{
-				for ( j = 0 ; j < 6 ; j++)
-				{
-					if ( mascara[i-1][fila_actual] == 1 && numeros[i] == total[j][fila_actual] )
+				bool primerQ = false;
+				bool segundoQ = false;
+				int pos = 0;
+				for ( k = 0 ; k < 6 ; k++ ) {
+					if ( total[k][fila_actual] == min )
 					{
-						mascara[i][fila_actual] = 1;
+						primerQ = true;
+						pos = k;
+						break;
 					}
+				}
+				for ( k = pos + 1 ; k < 6 ; k++ ) {
+					if ( total[k][fila_actual] == max )
+						segundoQ = true;
+				}
+				if ( primerQ && segundoQ )
+				{
+					#pragma omp critical
+					pair[i][j] += 1;
 				}
 			}
 		}
-		frecuencia[i] = count_ones(mascara[i], MAX_ROWS);
-		printf("Frecuencia de %2d: %3d\n",numeros[i], frecuencia[i]);
+	}
+	// Impresión de resultados
+	for ( i = 0 ; i <= RANK ; i++ ) {
+		printf("%2d,",i);
+	}
+	for ( i = 0 ; i <= RANK ; i++ ) {
+		printf("%2d,",i);
+		for ( j = 1 ; j <= RANK ; j++ ) {
+			printf("%2d,",pair[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+	printf("-----------------------\n");
+	printf("Adicionales\n");
+	printf("-----------------------\n");
+	/*
+	 * Cálculo natural con adicional 
+	 */
+	for ( i = 0 ; i <= RANK ; i++ ) {
+		printf("%2d,",i);
+	}
+	printf("\n");
+	#pragma omp parallel for private(j, fila_actual) collapse(3)
+	for ( i = 1 ; i <= RANK ; i++ ) {
+		// Segundo número
+		for ( j = 1 ; j <= RANK ; j++ ) {
+			// Iteramos sobre el historico
+			for ( fila_actual = 0 ; fila_actual < MAX_ROWS ; fila_actual++ ) {
+				bool primerQ = false;
+				bool segundoQ = false;
+				for ( k = 0 ; k < 6 ; k++ ) {
+					if ( total[k][fila_actual] == i )
+						primerQ = true;
+				}
+				if ( total[6][fila_actual] == j )
+					segundoQ = true;
+				if ( primerQ && segundoQ )
+				{
+					#pragma omp critical
+					adicionales[i][j] += 1;
+				}
+			}
+		}
+	}
+	// Impresión de resultados
+	for ( i = 0 ; i <= RANK ; i++ ) {
+		printf("%2d,",i);
+	}
+	for ( i = 0 ; i <= RANK ; i++ ) {
+		printf("%2d,",i);
+		for ( j = 1 ; j <= RANK ; j++ ) {
+			printf("%2d,",adicionales[i][j]);
+		}
+		printf("\n");
 	}
 }
 
@@ -106,18 +169,10 @@ int main(int argc, char *argv[]) {
 	struct timeval stop, start;
 	int numeros[7] = {0};
 	int i;
-	if ( argc < 2 || argc > 8 )
+	if ( argc > 2 )
 	{
-		printf("Error: El programa acepta entre 1 y 7 números.\n");
+		printf("Error: El programa no acepta argumentos.\n");
 		return 1;
-	}
-	// Leer argumentos
-	for (i = 1; i < argc; i++) {
-		numeros[i - 1] = atoi(argv[i]);
-		if (numeros[i - 1] < 1 || numeros[i - 1] > 56) {
-			printf("Error: Los números deben estar entre 1 y 56.\n");
-			return 1;
-		}
 	}
 	// Leer CSV
 	gettimeofday(&start, NULL);
