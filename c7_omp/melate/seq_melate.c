@@ -57,13 +57,42 @@ void leer_csv(char *filename, int *numeros, int n_args){
 		{
 			for ( j = 0 ; j < 7 ; j++ ) {
 				total[j][fila_actual] = R[j];
-				single[R[j] - 1] += 1;
 			}
 		}
 		fila_actual++;
 	}
 	fclose(file);
-	printf("Frecuencia números únicos\n");
+	int arr_adicionales[RANK];
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	printf("---------Adicionales---------\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	i = 0;
+	#pragma omp parallel for 
+	for ( i = 0 ; i < MAX_ROWS ; i++ ) {
+		#pragma omp critical
+		arr_adicionales[total[6][i] - 1] += 1;
+	}
+	for ( i = 0 ; i < RANK ; i++ ) {
+		printf("%2d,%3d\n", i+1,arr_adicionales[i]);
+	}
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	printf("----------Naturales----------\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	#pragma omp parallel for 
+	for ( i = 0 ; i < MAX_ROWS ; i++ ) {
+		#pragma omp critical
+		for ( j = 0 ; j < 7 ; j++ ) {
+			single[total[j][i] - 1] += 1;
+		}
+	}
 	for ( i = 0 ; i < RANK ; i++ ) {
 		printf("%2d,%3d\n", i+1, single[i]);
 	}
@@ -109,6 +138,13 @@ void leer_csv(char *filename, int *numeros, int n_args){
 		}
 	}
 	// Impresión de resultados
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	printf("---------Natural-------------\n");
+	printf("-----------con---------------\n");
+	printf("---------Natural-------------\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
 	for ( i = 0 ; i <= RANK ; i++ ) {
 		printf("%2d,",i);
 	}
@@ -120,16 +156,16 @@ void leer_csv(char *filename, int *numeros, int n_args){
 		printf("\n");
 	}
 	printf("\n");
-	printf("-----------------------\n");
-	printf("Adicionales\n");
-	printf("-----------------------\n");
 	/*
 	 * Cálculo natural con adicional 
 	 */
-	for ( i = 0 ; i <= RANK ; i++ ) {
-		printf("%2d,",i);
-	}
-	printf("\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
+	printf("---------Adicional-----------\n");
+	printf("------------con--------------\n");
+	printf("----------Natural------------\n");
+	printf("-----------------------------\n");
+	printf("-----------------------------\n");
 	#pragma omp parallel for private(j, fila_actual) collapse(3)
 	for ( i = 1 ; i <= RANK ; i++ ) {
 		// Segundo número
@@ -147,7 +183,7 @@ void leer_csv(char *filename, int *numeros, int n_args){
 				if ( primerQ && segundoQ )
 				{
 					#pragma omp critical
-					adicionales[i][j] += 1;
+					adicionales[i-1][j-1] += 1;
 				}
 			}
 		}
@@ -156,6 +192,7 @@ void leer_csv(char *filename, int *numeros, int n_args){
 	for ( i = 0 ; i <= RANK ; i++ ) {
 		printf("%2d,",i);
 	}
+	printf("\n");
 	for ( i = 0 ; i <= RANK ; i++ ) {
 		printf("%2d,",i);
 		for ( j = 1 ; j <= RANK ; j++ ) {
